@@ -1,20 +1,14 @@
 name: telegram message
 on: [push]
 jobs:
-
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: send telegram message on push
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TGKEY }}
-          token: ${{ secrets.TGCHANNELID }}
-          message: |
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
-            
-            Repository: ${{ github.repository }}
-            
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+    - uses: actions/checkout@master
+    - name: send custom message with args
+      uses: ./
+      with:
+        to: ${{ secrets.TGKEY }}
+        token: ${{ secrets.TGCHANNELID }}
+        args: The ${{ github.event_name }} event triggered first step.
