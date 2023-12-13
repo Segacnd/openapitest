@@ -6,9 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: send custom message with args
-      uses: ./
+    - name: send photo message
       with:
         to: ${{ secrets.TGKEY }}
         token: ${{ secrets.TGCHANNELID }}
-        args: The ${{ github.event_name }} event triggered first step.
+        message: send photo message
